@@ -1,6 +1,12 @@
 import { app } from './app'
 import { env } from './env'
 
-app.listen({ port: env.PORT }).then(() => {
-  console.log('HTTP Server is running!')
+const port = env.PORT
+
+app.listen({ port, host: '0.0.0.0' }, (err, address) => {
+  if (err) {
+    console.error(err)
+    process.exit(1)
+  }
+  console.log(`HTTP Server is running on ${address}`)
 })
